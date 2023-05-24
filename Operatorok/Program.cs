@@ -30,7 +30,7 @@ namespace Operatorok
             //5.
             Console.WriteLine("5. feladat: Statisztika");
 
-            lista.GroupBy(x => x.Oper).ToList().ForEach(x => Console.WriteLine($"\t{x.Key} -> {x.Count()}"));
+            lista.Where(x => new string[6]{"mod", "/", "div", "-", "*", "+"}.Contains(x.Oper)).GroupBy(x => x.Oper).ToList().ForEach(x => Console.WriteLine($"\t{x.Key} -> {x.Count()} db"));
 
         }
     }
