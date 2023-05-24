@@ -30,7 +30,49 @@ namespace Operatorok
             //5.
             Console.WriteLine("5. feladat: Statisztika");
 
-            lista.Where(x => new string[6]{"mod", "/", "div", "-", "*", "+"}.Contains(x.Oper)).GroupBy(x => x.Oper).ToList().ForEach(x => Console.WriteLine($"\t{x.Key} -> {x.Count()} db"));
+            lista.Where(x => new string[6] { "mod", "/", "div", "-", "*", "+" }.Contains(x.Oper)).GroupBy(x => x.Oper).ToList().ForEach(x => Console.WriteLine($"\t{x.Key} -> {x.Count()} db"));
+
+            //6.
+            string Eval(Operator muvelet)
+            {
+                try
+                {
+                    switch (muvelet.Oper)
+                    {
+                        case "div":
+                            return (muvelet.Szam1 / muvelet.Szam2).ToString();
+                            break;
+                        case "/":
+                            return (Convert.ToDouble(muvelet.Szam1) / muvelet.Szam2).ToString();
+                            break;
+                        case "mod":
+                            return (muvelet.Szam1 % muvelet.Szam2).ToString();
+                            break;
+                        case "-":
+                            return (muvelet.Szam1 - muvelet.Szam2).ToString();
+                            break;
+                        case "*":
+                            return (muvelet.Szam1 * muvelet.Szam2).ToString();
+                            break;
+                        case "+":
+                            return (muvelet.Szam1 + muvelet.Szam2).ToString();
+                            break;
+                        default:
+                            return "Hibás operátor!";
+                    }
+
+                }
+                catch (ArithmeticException)
+                {
+
+                    return "Egyéb hiba";
+                }
+                catch (FormatException)
+                {
+
+                    return "Egyéb hiba";
+                }
+            }
 
         }
     }
