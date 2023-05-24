@@ -40,12 +40,15 @@ namespace Operatorok
                     switch (muvelet.Oper)
                     {
                         case "div":
+                            if (muvelet.Szam2 == 0) return "Egyéb hiba!";
                             return (muvelet.Szam1 / muvelet.Szam2).ToString();
                             break;
                         case "/":
+                            if (muvelet.Szam2 == 0) return "Egyéb hiba!";
                             return (Convert.ToDouble(muvelet.Szam1) / muvelet.Szam2).ToString();
                             break;
                         case "mod":
+                            if (muvelet.Szam2 == 0) return "Egyéb hiba!";
                             return (muvelet.Szam1 % muvelet.Szam2).ToString();
                             break;
                         case "-":
@@ -65,14 +68,32 @@ namespace Operatorok
                 catch (ArithmeticException)
                 {
 
-                    return "Egyéb hiba";
+                    return "Egyéb hiba!";
                 }
                 catch (FormatException)
                 {
 
-                    return "Egyéb hiba";
+                    return "Egyéb hiba!";
                 }
+
             }
+
+            //7.
+            string muvelet = "";
+            while (muvelet.ToLower() != "vége")
+            {
+                Console.Write("7. feladat: Kérek egy kifejezést (pl.: 1 + 1): ");
+                muvelet = Console.ReadLine();
+                if (muvelet.ToLower() == "vége") break;
+                Operator temp = new Operator(int.Parse(muvelet.Split(' ')[0]), muvelet.Split(' ')[1], int.Parse(muvelet.Split(' ')[2]));
+                Console.WriteLine($"\t{muvelet} = {Eval(temp)}");
+            }
+
+            //8.
+            StreamWriter sw = new StreamWriter("eredmenyek.txt");
+            lista.ForEach(x => sw.WriteLine($"{x.Szam1} {x.Oper} {x.Szam2} = {Eval(x)}"));
+
+            Console.WriteLine("8. feladat: eredmenyek.txt");
 
         }
     }
